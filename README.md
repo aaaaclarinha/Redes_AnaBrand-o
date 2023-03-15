@@ -1,4 +1,4 @@
-<h1>Redes Neurais e Algoritmos Genéticos</h1>
+<h1 align="center">Redes Neurais e Algoritmos Genéticos</h1 align="center">
 
 <p align="center"> Repositório para o desenvolvimento da matéria de Redes Neurais e Algoritmos Genéticos da Ilum School of Science</p align="center">
 

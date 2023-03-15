@@ -1,11 +1,8 @@
-<head>
-<title>Redes Neurais e Algoritmos Genéticos</title>
+<h1>Redes Neurais e Algoritmos Genéticos</h1>
 
-<h1> Repositório para o desenvolvimento da matéria de Redes Neurais e Algoritmos Genéticos da Ilum School of Science</h1>
+<h3> Repositório para o desenvolvimento da matéria de Redes Neurais e Algoritmos Genéticos da Ilum School of Science</h3>
 
 ![redes-neurais-2](https://user-images.githubusercontent.com/106619091/225393126-c8acc2db-fd00-48e7-b272-54f4d4890678.jpg)
-  
-</head>
 
 Lembretes:
 

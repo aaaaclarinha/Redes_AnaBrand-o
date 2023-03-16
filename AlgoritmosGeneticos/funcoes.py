@@ -1,3 +1,5 @@
+import random 
+
 def gene_cb():
     """ gera um gene valido para cada caixa binária
     

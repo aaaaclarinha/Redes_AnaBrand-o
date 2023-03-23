@@ -11,8 +11,4 @@ Esceva um README aqui para guiar o leitor sobre seus experimentos realizados.
 <details><summary><b> Busca em Grade </b></summary>
     <p> Aborda-se novamnete o problema da Caixa Binária: existem 4 caixas, e cada uma delas pode assumir um valor binário (0 ou 1), o objetivo é encontrar a combinação que tenha a maior soma entre os valores das caixas. Neste caso, o método usado é o de Busca em Grade. Diferente da Busca Aleatória, aqui não se define um espaço de busca, mas testa-se todas as opções possivéis dentro dos parametros para assim achar o melhor resultado. 
     </details>
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> cc27c82d8dc548be61ef70f31398d2bcffde0daf
+

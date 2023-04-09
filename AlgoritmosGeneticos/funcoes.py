@@ -383,83 +383,42 @@ def funcao_objetivo_pop_senha(populacao, senha_verdadeira):
 #    PROBLEMA DA LIGA TENÁRIA MAIS CARA    #
 ############################################
 
-def gene_liga(elementos):
+def gene_liga(lista_elementos):
     
-    """Sorteia uma elemento do dicionário.
+    """Sorteia um elememto da lista.
     
         Args:
-          letras: elementos possíveis de serem sorteadas.
+          lista_elementos: lista de elementos
         
         Return:
-          Retorna um elemento dentro das possíveis de serem sorteadas.
+          Retorna um elemento da lista e um valor númerico representando seu peso na liga 
     
     """
-    gene = random.choice(list(elementos.items()))                      
+    lista_gene = []
+    
+    massa_elementos = []
+    
+    nomes_elementos = []
+    
+    preco_elementos = []
+    
+    for valor in lista_elementos:
+        preco_elementos.append(lista_elementos[valor])
+        
+    for massa in itertools.product(lista_elementos, range(5, 90)):
+        massa_elementos.append(massa[1])
+        
+    for elemento in lista_elementos.keys():
+        nomes_elementos.append(elemento)
+        
+    for i in itertools.product(nomes_elementos, massa_elementos, preco_elemento):
+        lista_gene.append(i)
+        
+    gene = random.sample(lista_gene, k=1)
+    
     return gene
 
-
-def individuo_liga(peso_liga, peso_min_elem, lista):
-    ''' gera um individuo valido para a liga, considerando
-        os parâmetros já postos 
-        
-            Args: 
-                peso_liga: peso final que a liga deve ter 
-                peso_min_elem: peso minimo que cada elemento tem que ter na liga 
-                lista: lista de elementos 
-                
-            Return:
-                individuo valido 
-                valor da liga 
-    '''
-    #individuo = {}
-    #for i in lista   
-
-def populacao_inicial_liga(tamanho, tamanho_liga, genes):
     
-    """Cria população inicial no problema da liga
-    
-        Args
-          tamanho: tamanho da população.
-          tamanho_liga: inteiro representando o tamanho da liga.
-          genes: elementos possíveis de serem sorteadas.
-    
-        Returns:
-          Lista com todos os indivíduos da população no problema da liga.
-    """
-    
-    populacao = []
-    
-    for n in range(tamanho):
-        populacao.append(individuo_liga(tamanho_liga, letras))
-        
-    return populacao
-
-#def funcao_obj_liga(individuo):
-#    ''' Calcula o fitness do individuo para o problema da liga mais cara 
-#    
-#    Args:
-#        individuo: dicionário que representa um individuo
-#        
-#    Returns:
-#        Um valor que represeta o fitness do individuo 
-#    '''
-#    fitness = sum(individuo[])
-#    return fitness
-
-def funcao_obj_pop_liga(populacao):
-    ''' Calcula o fitness da população completa
-    
-    Args:
-        populacao: lista com todos os individuod da população
-        
-    Return:
-        uma lista com o fitness de cada individuo em ordem
-    '''
-    fitness_pop = []
-    for individuo in populacao:
-        fitness_ind = funcao_obj_liga(individuo)
-        fitness_pop.append(fitness_ind)
-    return fitness_pop
 
 ############################################
 #      PROBLEMA DO CAIXEIRO VIAJANTE       #

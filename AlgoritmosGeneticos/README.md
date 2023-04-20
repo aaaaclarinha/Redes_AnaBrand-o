@@ -16,8 +16,8 @@ Esceva um README aqui para guiar o leitor sobre seus experimentos realizados.
 
 <details><summary><b> Algoritmo Genético </b></summary>
 <p><p/>
-<p align="justify"Algoritmos genéticos são algoritmos inspirados na teoria da evolução de Darwin e são ferramentas poderosas para resolver problemas de otimização. De maneira simples, a estratégia consiste em gerar uma população inicial aleatória e através de seleção, cruzamento e mutação sucessivas, gerar populações seguintes. Se feito de maneira correta, as populações seguintes tendem a ser melhores candidatos para a solução do problema do que as populações anteriores.
-></p>
+<p align="justify"> Algoritmos genéticos são algoritmos inspirados na teoria da evolução de Darwin e são ferramentas poderosas para resolver problemas de otimização. De maneira simples, a estratégia consiste em gerar uma população inicial aleatória e através de seleção, cruzamento e mutação sucessivas, gerar populações seguintes. Se feito de maneira correta, as populações seguintes tendem a ser melhores candidatos para a solução do problema do que as populações anteriores.
+</p>
 </details>
 
 <details><summary><b> Caixas não-binárias </b></summary>

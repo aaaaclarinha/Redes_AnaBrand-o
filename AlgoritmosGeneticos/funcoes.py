@@ -383,44 +383,8 @@ def funcao_objetivo_pop_senha(populacao, senha_verdadeira):
 #    PROBLEMA DA LIGA TENÁRIA MAIS CARA    #
 ############################################
 
-####################### TEMPORARIAMENTE ABANDONADO  #################################
 
-def gene_liga(lista_elementos):
-    
-    """Sorteia um elememto da lista.
-    
-        Args:
-          lista_elementos: lista de elementos
-        
-        Return:
-          Retorna um elemento da lista e um valor númerico representando seu peso na liga 
-    
-    """
-    lista_gene = []
-    
-    massa_elementos = []
-    
-    nomes_elementos = []
-    
-    preco_elementos = []
-    
-    for valor in lista_elementos:
-        preco_elementos.append(lista_elementos[valor])
-        
-    for massa in itertools.product(lista_elementos, range(5, 90)):
-        massa_elementos.append(massa[1])
-        
-    for elemento in lista_elementos.keys():
-        nomes_elementos.append(elemento)
-        
-    for i in itertools.product(nomes_elementos, massa_elementos, preco_elemento):
-        lista_gene.append(i)
-        
-    gene = random.sample(lista_gene, k=1)
-    
-    return gene
-
-####################### TEMPORARIAMENTE ABANDONADO  #################################
+######################### WORKING  #################################
     
 
 ############################################

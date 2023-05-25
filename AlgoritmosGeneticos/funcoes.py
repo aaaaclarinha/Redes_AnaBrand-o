@@ -479,8 +479,6 @@ def individuo_liga(n, elementos):
               elementos: dicionario onde as chaves são os nomes dos elementos e os 
               valores correspondem ao preço por grama
               
-              ordem_dos_nome: lista contendo as chaves do dicionário em ordem
-              
         Returns:
               individuo composto por três elementos e seus respectivos valores (por grama)          
     """
@@ -489,8 +487,40 @@ def individuo_liga(n, elementos):
     for _ in range(n):
         ind = gene_liga(elementos) 
         individuo.append(ind)
+        
+    # para que os elementos não se repitam 
+    checagem = checa_individuo(individuo) 
+    while checagem == True:
+        for i in range(len(individuo)):
+            # separando elementos que ainda não estão na liga
+            elementos_restantes = elementos.copy()
+            elementos_restantes.pop(individuo[i][0])
+            
+            # alterando gene repetido
+            individuo[i] = gene_liga(elementos_restantes)
+            # checando se não há novas repetições 
+            checagem = checa_individuo(individuo)
 
     return individuo
+
+def checa_individuo(individuo):
+    """ checa se todos os elementos do individuo são diferentes
+    
+        Arg:
+            individuo 
+            
+        Return:
+            True caso haja elementos iguais 
+            False caso todos os elementos sejam diferentes 
+            
+    """
+    for i in range(len(individuo)):
+        for j in range(i + 1, len(individuo)):
+            
+            if individuo[i] == individuo[j]:
+                return True 
+    
+    return False
 
 def populacao_liga(n, elementos, tamanho_populacao):
     """
@@ -560,6 +590,41 @@ def funcao_obj_pop_liga(populacao, valores_de_massa):
     
     return fitness
 
+def cruzamento_liga(pai, mae):
+    """ ...
+    
+        Args:
+            pai: uma lista representando um individuo 
+            mae: uma lista representando um individuo 
+            
+        Returns:
+            duas listas, sendo que cada uma representa um filho dos pais que foram os argumnetos 
+    """
+    genes = pai + mae
+    genes_disponiveis = []
+    valores = []
+    
+    # separando os nomes e valores em listas individuais 
+    for elemento in genes:
+        genes_disponiveis.append(elemento[0]) 
+        valores.append(elemento[1])
+    
+    # eliminando elementos repetidos com metodo 'set()'
+    genes_disponiveis = list(set(genes_disponiveis))
+    valores = list(set(valores))
+    
+    # juntando novamente nomes e valores
+    gene_finais = []
+    for valor, elemento in zip(valores, genes_disponiveis):
+        gene = [elemento, valor]
+        gene_finais.append(gene)
+        
+    # gerando filhos         
+    filho1 = random.sample(gene_finais, len(pai))
+    filho2 = random.sample(gene_finais, len(pai))
+
+    return filho1, filho2
+
 def mutacao_liga(individuo, elementos):
     
     """Realiza a mutação de um gene na liga ternaria
@@ -578,6 +643,12 @@ def mutacao_liga(individuo, elementos):
     gene = random.randint(0, len(individuo) - 1)
     
     individuo[gene] = gene_liga(elementos)
+    
+    # para não repetir os genes 
+    checagem = checa_individuo(individuo)
+    while checagem == True:
+        individuo[gene] = gene_liga(elementos)
+        checagem = checa_individuo(individuo)
     
     return individuo
 

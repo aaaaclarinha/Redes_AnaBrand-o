@@ -380,12 +380,207 @@ def funcao_objetivo_pop_senha(populacao, senha_verdadeira):
     return resultado
 
 ############################################
-#    PROBLEMA DA LIGA TENÁRIA MAIS CARA    #
+#    PROBLEMA DA LIGA TERNÁRIA MAIS CARA    #
 ############################################
 
-
-######################### WORKING  #################################
+def gene_liga(elementos):
+    """
+       Gera um gene para a liga ternária 
+       
+        Args:
+              elementos: dicionario onde as chaves são os nomes dos elementos e os 
+              valores correspondem ao preço por grama
+              
+        Returns:
+              lista com o nome do elemento e quanto ele vale por grama
+              
+    """
     
+    valor_elementos = elementos.values()
+    ordem_dos_nomes = elementos.keys()
+    gene_liga = []
+    
+    for valor, elemento in zip(valor_elementos, ordem_dos_nomes):
+        gene = [elemento, valor]
+        gene_liga.append(gene)
+        
+    gene = random.choice(gene_liga)
+        
+    return gene
+
+def computa_massas(n):
+    """ determina tres valores aleatórias cujo a soma resulta em 100, para cada individuo da populacao
+    
+        ARGS: 
+            n: número de elementos no individuo
+            
+        RETURNS: 
+            lista com tres valores          
+    """
+        
+    valores_de_massa = []
+        
+    for _ in range(n):
+        valor = random.randint(5, 90)
+        valores_de_massa.append(valor)
+
+    massa_final = sum(valores_de_massa)
+
+    # Aplicando restrição de massa
+    while massa_final != 100:
+        i = random.randint(0, 2) # para mudar uma massa aleatória 
+
+        if massa_final > 100 and valores_de_massa[i] != 5: 
+            valores_de_massa[i] -= 1
+
+        if massa_final < 100:
+            valores_de_massa[i] += 1
+
+        massa_final = sum(valores_de_massa)
+
+    # Certificando que os valores de massa sejam positivos
+    
+    for i in range(n):
+        if valores_de_massa[i] < 0:
+            valores_de_massa[i] = valores_de_massa[i] * -1      
+    
+    return valores_de_massa
+
+def computa_massa_pop(n, tamanho_populacao):
+    """ 
+        determina tres valores aleatórias cujo a soma resulta em 100, para cada individuo da populacao
+    
+            ARGS: 
+                n: número de elementos no individuo
+                
+                tamanho_populacao = número de individuos na população
+
+            RETURNS: 
+                lista com tres valores          
+    """
+    
+    massas_pop = []
+    
+    for _ in range(tamanho_populacao):
+        
+        valores_de_massa = computa_massas(n)
+        
+        massas_pop.append(valores_de_massa)
+        
+    return massas_pop
+
+def individuo_liga(n, elementos):
+    """
+       Gera um individuo válido para a liga ternária 
+       
+        Args:
+              n: número de elementos na liga 
+              
+              elementos: dicionario onde as chaves são os nomes dos elementos e os 
+              valores correspondem ao preço por grama
+              
+              ordem_dos_nome: lista contendo as chaves do dicionário em ordem
+              
+        Returns:
+              individuo composto por três elementos e seus respectivos valores (por grama)          
+    """
+    individuo = []
+    
+    for _ in range(n):
+        ind = gene_liga(elementos) 
+        individuo.append(ind)
+
+    return individuo
+
+def populacao_liga(n, elementos, tamanho_populacao):
+    """
+       Gera uma população de ligas ternárias 
+       
+        Args:
+              n: número de elementos na liga 
+              
+              elementos: dicionario onde as chaves são os nomes dos elementos e os 
+              valores correspondem ao preço por grama
+              
+              ordem_dos_nome: lista contendo as chaves do dicionário em ordem
+              
+              tamanho_populacao: número inteiro indicando quantos individuos terá a
+              população
+              
+        Returns:
+              lista contendo n=tamanha_populacao individuos          
+    """
+    populacao = []
+    
+    for i in range(tamanho_populacao):
+        populacao.append(individuo_liga(n, elementos))
+        
+    return populacao
+
+def funcao_obj_liga(individuo):
+    """
+       Calcula o preço da liga com base na quantidade em massa de cada elemento
+       
+        Args:
+              individuo: lista composta por três elementos, seus respectivos valores (por grama)
+              e a massa de cada um presente na liga 
+              
+        Returns:
+              valor final da liga       
+    """
+    valores_de_massa = computa_massas(len(individuo))
+    
+    valor_total_liga = 0
+    
+    for elemento, massa in zip(individuo, valores_de_massa):
+        preco_elemento = elemento[1] * massa
+        valor_total_liga += preco_elemento
+        
+    return valor_total_liga
+
+def funcao_obj_pop_liga(populacao, valores_de_massa):
+    """ 
+    Calcula a função objetiva para todos os membros de uma populaçao
+    
+        Args:
+            populacao: lista com individuos da populaçao
+            
+            individuo: lista composta por três elementos, seus respectivos valores 
+            (por grama)e a massa de cada um presente na liga 
+            
+        Returns:
+            lista de valores representando a fitness de cada individuo da populaçao 
+     """
+    
+    fitness = []
+    
+    for individuo in populacao:
+        valor = funcao_obj_liga(individuo)
+        fitness.append(valor)
+    
+    return fitness
+
+def mutacao_liga(individuo, elementos):
+    
+    """Realiza a mutação de um gene na liga ternaria
+    
+        Args:
+          individuo: uma lista representado um individuo no problema da senha
+          
+          elementos: dicionario onde as chaves são os nomes dos elementos e os 
+          valores correspondem ao preço por grama
+              
+         ordem_dos_nome: lista contendo as chaves do dicionário em ordem
+            
+        Return:
+          Um individuo com um gene mutado.    
+    """
+    gene = random.randint(0, len(individuo) - 1)
+    
+    individuo[gene] = gene_liga(elementos)
+    
+    return individuo
+
 
 ############################################
 #      PROBLEMA DO CAIXEIRO VIAJANTE       #

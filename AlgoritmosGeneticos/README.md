@@ -43,3 +43,8 @@
 <p><p/>
 <p align="justify">Caso muito similar ao Problema do Caixeiro Viajente, contudo, neste caso, o caixeiro possui gasolina infinita e procura fazer a maior rota possivel entre as cidades.</p>
 </details>
+
+<details><summary><b> A Liga Ternária Mais Cara</b></summary>
+<p><p/>
+<p align="justify">As ligas ternárias são compostas por três elementos químicos diferentes, combinados em proporções definidas. Essas ligas desempenham um papel fundamental em diversas áreas, como a indústria, a pesquisa científica e a tecnologia. O objetivo do esperimento é encontrar uma liga de três elementos que tenha o maior custo possível usando um algoritmo genético. </p>
+</details>

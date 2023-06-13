@@ -396,14 +396,17 @@ def gene_liga(elementos):
               
     """
     
+    # separar as chaves e valores para que o gene retornado seja uma lista
     valor_elementos = elementos.values()
     ordem_dos_nomes = elementos.keys()
     gene_liga = []
     
     for valor, elemento in zip(valor_elementos, ordem_dos_nomes):
+        # 'montando' um gene, em formato de lista
         gene = [elemento, valor]
         gene_liga.append(gene)
         
+    # selecionando um gene aleatório
     gene = random.choice(gene_liga)
         
     return gene
@@ -415,11 +418,12 @@ def computa_massas(n):
             n: número de elementos no individuo
             
         RETURNS: 
-            lista com tres valores          
+            lista com tres valores correspondentes as massas        
     """
         
     valores_de_massa = []
-        
+    
+    # gerando um espaço de busca para as massas
     for _ in range(n):
         valor = random.randint(5, 90)
         valores_de_massa.append(valor)
@@ -429,17 +433,19 @@ def computa_massas(n):
     # Aplicando restrição de massa
     while massa_final != 100:
         i = random.randint(0, 2) # para mudar uma massa aleatória 
-
-        if massa_final > 100 and valores_de_massa[i] != 5: 
+        
+        # caso a massa_final seja maior que 100
+        # e se a massa a ser mudada for diferente de 5
+        if massa_final > 100 and valores_de_massa[i] != 5:
             valores_de_massa[i] -= 1
 
+        # caso a massa_final seja menor que 100
         if massa_final < 100:
             valores_de_massa[i] += 1
 
         massa_final = sum(valores_de_massa)
 
     # Certificando que os valores de massa sejam positivos
-    
     for i in range(n):
         if valores_de_massa[i] < 0:
             valores_de_massa[i] = valores_de_massa[i] * -1      
@@ -458,7 +464,6 @@ def computa_massa_pop(n, tamanho_populacao):
             RETURNS: 
                 lista com tres valores          
     """
-    
     massas_pop = []
     
     for _ in range(tamanho_populacao):
@@ -504,7 +509,8 @@ def individuo_liga(n, elementos):
     return individuo
 
 def checa_individuo(individuo):
-    """ checa se todos os elementos do individuo são diferentes
+    """ 
+        checa se todos os elementos do individuo são diferentes
     
         Arg:
             individuo 
@@ -514,6 +520,7 @@ def checa_individuo(individuo):
             False caso todos os elementos sejam diferentes 
             
     """
+    # compara os genes do individuo 
     for i in range(len(individuo)):
         for j in range(i + 1, len(individuo)):
             
@@ -547,7 +554,7 @@ def populacao_liga(n, elementos, tamanho_populacao):
         
     return populacao
 
-def funcao_obj_liga(individuo):
+def funcao_obj_liga(individuo, massas):
     """
        Calcula o preço da liga com base na quantidade em massa de cada elemento
        
@@ -562,13 +569,13 @@ def funcao_obj_liga(individuo):
     
     valor_total_liga = 0
     
-    for elemento, massa in zip(individuo, valores_de_massa):
+    for elemento, massa in zip(individuo, massas):
         preco_elemento = elemento[1] * massa
         valor_total_liga += preco_elemento
         
     return valor_total_liga
 
-def funcao_obj_pop_liga(populacao, valores_de_massa):
+def funcao_obj_pop_liga(populacao, populacao_massas):
     """ 
     Calcula a função objetiva para todos os membros de uma populaçao
     
@@ -584,8 +591,8 @@ def funcao_obj_pop_liga(populacao, valores_de_massa):
     
     fitness = []
     
-    for individuo in populacao:
-        valor = funcao_obj_liga(individuo)
+    for individuo, massa in zip(populacao, populacao_massas):
+        valor = funcao_obj_liga(individuo, massa)
         fitness.append(valor)
     
     return fitness
@@ -619,6 +626,10 @@ def cruzamento_liga(pai, mae):
         gene = [elemento, valor]
         gene_finais.append(gene)
         
+    #print(pai)
+    #print(mae)
+    #print(gene_finais)
+        
     # gerando filhos         
     filho1 = random.sample(gene_finais, len(pai))
     filho2 = random.sample(gene_finais, len(pai))
@@ -640,8 +651,10 @@ def mutacao_liga(individuo, elementos):
         Return:
           Um individuo com um gene mutado.    
     """
+    # seleciona um gene aleatório para ser mutado
     gene = random.randint(0, len(individuo) - 1)
     
+    # substitui o gene por um novo 
     individuo[gene] = gene_liga(elementos)
     
     # para não repetir os genes 

@@ -54,4 +54,4 @@ def plota_grafo(raiz):
     for n1, n2 in arestas:
         grafo.edge(str(id(n1)), str(id(n2)) + n2.operador_mae)
 
-    return grafo 
+    return grafo
